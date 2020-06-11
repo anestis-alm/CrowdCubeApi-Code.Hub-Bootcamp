@@ -1,0 +1,59 @@
+﻿.input-group.md-form.form-sm.form-1 input {
+    border: 1px solid #bdbdbd;
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+}
+
+
+#album {
+    padding-top:50px;
+}
+
+.search-btn {
+    width: 80px;
+    background: #e57a2d;
+    color: #fff;
+    cursor: pointer;
+    border: 0;
+}
+
+
+.col-md-4 img{
+   height:200px;
+    
+}
+
+
+.pages {
+    text-decoration: none;
+    display: inline-block;
+    padding: 8px 16px;
+    border: none;
+    background: none;
+    background-color: orange;
+    color: white;
+    width: 140px;
+}
+
+
+.pages:hover {
+    background-color: darkorange;
+    color: black;
+}
+
+.cat-btn {
+    padding: 0;
+    border: none;
+    background: none;
+    float: left;
+    box-shadow: none;
+    outline: none;
+}
+
+.cat-btn:focus {
+
+    outline: none;
+}
+.page-link:disabled {
+    color: grey;
+}

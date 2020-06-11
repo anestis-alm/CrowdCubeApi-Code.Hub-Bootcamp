@@ -1,0 +1,62 @@
+.login-content {
+    width: 400px;
+    padding: 50px;
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+}
+
+.signup-content {
+    width: 400px;
+    min-height: 68em;
+    padding: 50px;
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+}
+
+
+
+.signup-form h1 {
+    text-align: center;
+    font-size: 30px;
+}
+
+.signup-form h2 {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 15px;
+}
+
+
+.signup-btn {
+    width:100%;
+    height:50px;
+    background: #e57a2d;
+    color: #fff;
+    cursor: pointer;
+    font-size: 100%;
+    border: 0;
+}
+
+    .signup-btn:hover {
+        transform: scale(0.96);
+    }
+
+.agree-term {
+    height: 30px;
+}
+
+
+input[type=text], [type=email], [type=password], select {
+    font-size: 100%;
+}
+
+
+.label {
+    font-size: 18px;
+    display: block;
+    margin-bottom: 5px;
+}
