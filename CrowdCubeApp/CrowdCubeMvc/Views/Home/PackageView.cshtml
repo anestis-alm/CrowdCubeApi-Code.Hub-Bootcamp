@@ -1,0 +1,57 @@
+﻿@model CrowdCubeMvc.Models.ProjectCreatorModels
+@{
+    ViewData["Title"] = "Explore";
+    Layout = "~/Views/Shared/_BackerLayout.cshtml";
+}
+<head>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+
+
+    <!-- Custom styles for this template -->
+    <link href="~/css/pricing.css" rel="stylesheet">
+</head>
+
+
+<section class="page-section" id="pricing">
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <h1 class="display-4">Back this project</h1>
+        <h5 class="display-5">Select A Perk</h5>
+    </div>
+
+    <div class="container">
+        <div class="card-deck mb-3 text-center">
+
+            @{
+
+                foreach (var package in Model.Packages)
+                {
+
+                    <div class="card mb-4 shadow-sm">
+                        <div class="card-header">
+                            <h4 class="my-0 font-weight-normal">PACKAGE PACK</h4>
+                        </div>
+                        <div class="card-body">
+                            <h1 class="card-title pricing-card-title">€ @package.Amount EUR </h1>
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li>@package.Description</li>
+                                <li>@package.Reward</li>
+                                <li>Ships worldwide</li>
+                            </ul>
+                        </div>
+                        <div class="card-footer">
+                            <div class="btn-group">
+                                <a class="btn btn-lg btn-block btn-outline-primary" href="@(Url.Action("CheckOut", "Home" , new {  userId = @Model.BackerId , projectId =  @Model.ProjectId , packageId = @package.Id}))">GET THIS PERK </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+
+
+        </div>
+
+        <div class="form-group">
+            <div id="responseDiv" align="center" style="font-weight:bold;"></div>
+        </div>
+    </div>
+</section>

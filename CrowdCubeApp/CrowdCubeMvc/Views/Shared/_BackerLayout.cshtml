@@ -1,12 +1,13 @@
-﻿<!DOCTYPE html>
+﻿@model CrowdCubeMvc.Models.ProjectCreatorModels
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>@ViewData["Title"] - Crowdcube</title>
-    <link rel="icon" type="image/x-icon" href="~/assets/img/crowdcube.ico" />
+    <title>@ViewData["Title"] - CFMApp</title>
+    <link rel="icon" type="image/x-icon" href="~/assets/img/Crowdcube.png" />
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v5.12.1/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
@@ -22,16 +23,29 @@
         <div class="container">
             <a class="navbar-brand js-scroll-trigger" href="#page-top"><img src="~/assets/img/Crowdcube_logo.png" /></a><button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu<i class="fas fa-bars ml-1"></i></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav text-uppercase ml-auto">
+                <ul class="navbar-nav text-uppercase ml-auto nav-flex-icons">
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        <a class="nav-link js-scroll-trigger" href="@(Url.Action("BackerIndex", "HOME"))?userId=@Model.BackerId">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
+                        <a class="nav-link js-scroll-trigger" href="@(Url.Action("Explore", "Home"))?userId=@Model.BackerId">Explore</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" asp-area="" asp-controller="Home" asp-action="SignUp">Sign Up</a>
+                    <li class="nav-item dropdown">
+
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-555" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            |&nbsp;&nbsp;&nbsp;
+                            <i class="fas fa-user"></i>
+                            &nbsp;@Model.BackerName
+
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right dropdown-default"
+                             aria-labelledby="navbarDropdownMenuLink-555" style="background-color:#212529">
+                            <a class="nav-link js-scroll-trigger" href="@(Url.Action("MyFunds", "Home"))?userId=@Model.BackerId">MyFunds</a>
+                            <a class="nav-link js-scroll-trigger" asp-area="" asp-controller="Home" asp-action="Index">Log Out</a>
+                        </div>
                     </li>
+
 
                 </ul>
             </div>
@@ -44,12 +58,11 @@
     <footer class="footer py-4">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-4 text-lg-left">Copyright ©  crowdcube 2020</div>
-                <div class="col-lg-4 my-3 my-lg-0">
+                <div class="col-lg-6 text-lg-left">Copyright ©  crowdcube 2020</div>
+                <div class="col-lg-6 my-3 my-lg-0">
                     <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a><a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a><a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
                 </div>
-                <div class="col-lg-2 text-lg-right"><a class="mr-3" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy Policy</a></div>
-                <div class="col-lg-2 text-lg-right"><a class="mr-3" asp-area="" asp-controller="Home" asp-action="#">Terms of Use</a></div>
+
 
             </div>
 
@@ -66,3 +79,5 @@
     @RenderSection("Scripts", required: false)
 </body>
 </html>
+
+

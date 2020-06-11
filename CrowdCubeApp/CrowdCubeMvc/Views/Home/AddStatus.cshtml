@@ -1,0 +1,37 @@
+﻿@model CrowdCubeMvc.Models.ProjectCreatorModels
+@{
+    ViewData["Title"] = "AddStatus";
+    Layout = "~/Views/Shared/_ProjectCreatorLayout.cshtml";
+}
+
+
+<head>
+    <link href="~/css/AddProject.css" rel="stylesheet" />
+</head>
+
+
+<div class="container">
+    <div class="addproject-content">
+        <form id="addstatus-form" class="addproject-form">
+            <div class="form-group">
+                <h1>Let’s add status to your campaign!</h1>
+                <h2>Inform your backers for your progress.</h2>
+            </div>
+
+            <div class="form-group">
+                <label class="label">Title</label>
+                <input type="text" class="form-control" name="Title" id="Title" placeholder="Your message" required="required" />
+            </div>
+
+            <input type="hidden" id="ProjectCreatorId" value="@Model.ProjectCreatorId" />
+            <input type="hidden" id="ProjectId" value="@Model.ProjectId" />
+
+            <div class="form-group">
+                <input type="submit" class="addproject-btn" />
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/js/site.js"></script>
+}

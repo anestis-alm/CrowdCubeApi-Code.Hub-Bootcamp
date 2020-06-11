@@ -1,0 +1,51 @@
+﻿@model CrowdCubeMvc.Models.ProjectCreatorModels
+
+@{
+    ViewData["Title"] = "AddPackage";
+    Layout = "~/Views/Shared/_ProjectCreatorLayout.cshtml";
+}
+
+<head>
+    <link href="~/css/AddPackage.css" rel="stylesheet" />
+</head>
+
+
+<div class="container">
+    <div class="addpackage-content">
+        <form id="addpackage-form" class="addpackage-form">
+            <div class="form-group">
+                <h1>Let’s add some packages offers!</h1>
+            </div>
+            <div class="form-group">
+                <label class="label">Amount</label>
+                <input type="number" class="form-control" step="any" id="Amount" name="Amount" placeholder="Your Package Amount" required="required">
+            </div>
+
+            <div class="form-group">
+                <label class="label">Description</label>
+                <input type="text" class="form-control" name="Description" id="Description" placeholder="Package Description" required="required" />
+            </div>
+
+            <div class="form-group">
+                <label class="label">Reward</label>
+                <input type="text" class="form-control" name="Reward" id="Reward" placeholder="Backer Reward" required="required" />
+            </div>
+
+            <input type="hidden" id="ProjectId" value="@Model.ProjectId" />
+
+            <div class="form-group">
+                <input type="submit" class="addpackage-btn" value="START CAMPAIGN" />
+            </div>
+
+            <div class="form-group">
+                <div id="responseDiv"></div>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts{
+    <script src="../js/site.js"></script>
+}
+
+
+

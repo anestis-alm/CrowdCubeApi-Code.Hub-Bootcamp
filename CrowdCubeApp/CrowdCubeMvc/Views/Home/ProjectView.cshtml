@@ -1,0 +1,124 @@
+﻿@model CrowdCubeMvc.Models.ProjectCreatorModels
+@{
+    ViewData["Title"] = "ProjectView";
+    Layout = "~/Views/Shared/_BackerLayout.cshtml";
+}
+
+
+<section class="page-section bg-light" id="portfolio">
+    <div class="container">
+
+        <div class="row">
+
+            <!-- Blog Entries Column -->
+            <div class="col-md-8">
+
+                <h1 class="my-4 list-group-item list-group-item-success">
+                    @Model.Project.Title
+                </h1>
+
+                <!-- Blog Post -->
+                <div class="card mb-4">
+                    <img class="card-img-top" src="~/assets/img/@Model.Project.ThemeImage" alt="Card image cap">
+                    <div class="card-body list-group-item">
+                        <h2 class="card-title">Description</h2>
+                        <p class="card-text">@Model.Project.Description</p>
+                    </div>
+                </div>
+
+                @{
+                    foreach (var media in Model.Medias)
+                    {
+                        if (media.Type == "Image")
+                        {
+                            <div class="card mb-4">
+                                <img class="card-img-top" src="~/assets/img/@media.URL" alt="Card image cap">
+                            </div>
+                        }
+                        else if (media.Type == "Text")
+                        {
+                            <div class="card mb-4">
+                                <div class="card-body list-group-item">
+                                    <p class="card-text">@media.URL</p>
+                                </div>
+                            </div>
+                        }
+                        else if (media.Type == "Video")
+                        {
+                            <div class="card mb-4">
+                                <iframe style="max-width:735px;" height="400"
+                                        src="@(media.URL)">
+                                </iframe>
+                            </div>
+                        }
+                    }
+                }
+
+                <!-- Pagination -->
+                <ul class="pagination justify-content-center mb-4">
+                    <li class="page-item">
+                        <a class="page-link" href="#">&larr; Older</a>
+                    </li>
+                </ul>
+
+            </div>
+            <!-- Sidebar Widgets Column -->
+            <div class="col-md-4">
+
+                <!-- Side Widget -->
+                <div class="card my-4">
+                    <h5 class="card-header">Money Goal: @Model.Project.Goal</h5>
+                    <div class="card-body">
+                        <h4><span class="list-group-item list-group-item-warning">Progress:</span></h4>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: @(Model.Project.Progress)%;" aria-valuenow="@(Model.Project.Progress)" aria-valuemin="0" aria-valuemax="100">@(Model.Project.Progress)%</div>
+                        </div>
+                        <div class="curr_amount" style="margin-top:20px;">
+                            <h5>
+                                <span class="label label-info">Current Amount:</span>
+                                <small class="text-muted">@Model.Project.CurrentAmount</small>
+                            </h5>
+                        </div>
+                        <div class="backers" style="margin-top:20px;">
+                            <h5>
+                                <span class="label label-info">Number of Funds:</span>
+                                <small class="text-muted">@Model.Project.NumberOfBackers</small>
+                            </h5>
+                        </div>
+
+                        <div class="button" style="margin-top:20px;">
+                            <a href="@(Url.Action("PackageView", "Home" , new { projectId =  @Model.ProjectId , userId = @Model.BackerId}))" class="btn btn-primary stretched-link" style="width:100%;">BACK IT</a>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="card my-4">
+                    <h5 class="card-header">Project's Status</h5>
+                    <div class="card-body">
+                        @{
+                            foreach (var ps in Model.ProjectStatus)
+                            {
+
+                                <h4><span class="list-group-item list-group-item-warning">Status: @ps.Title</span></h4>
+                                <h6>
+                                    Date:
+                                    <small class="text-muted">@ps.Date</small>
+                                </h6>
+
+                            }
+                        }
+                    </div>
+                </div>
+
+
+
+
+
+
+
+            </div>
+            <!-- /.row -->
+
+        </div>
+    </div>
+</section>

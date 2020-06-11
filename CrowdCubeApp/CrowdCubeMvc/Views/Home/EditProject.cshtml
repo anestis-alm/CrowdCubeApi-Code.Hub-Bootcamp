@@ -1,0 +1,102 @@
+﻿@model CrowdCubeMvc.Models.ProjectCreatorModels
+@{
+    ViewData["Title"] = "EditProject";
+    Layout = "~/Views/Shared/_ProjectCreatorLayout.cshtml";
+}
+
+
+<head>
+    <link href="~/css/AddProject.css" rel="stylesheet" />
+</head>
+
+
+<div class="container">
+    <div class="addproject-content">
+        <form id="editproject-form" class="addproject-form">
+            <div class="form-group">
+                <h1>Let’s get ready to start your campaign!</h1>
+                <h2>We want to create the best onboarding for you – please fill out the information below.</h2>
+            </div>
+            <div class="form-group">
+                <label class="label">Title</label>
+                <input type="text" class="form-control" id="Title" name="Title" value="@Model.SingleProject.Title" required="required" />
+            </div>
+
+            <div class="form-group">
+                <label class="label">Description</label>
+                <input type="text" class="form-control" name="Description" id="Description" value="@Model.SingleProject.Description" required="required" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Categories" class="control-label"></label>
+                <select name="Category" id="Category"
+                        class="form-control">
+                    @foreach (var value in Enum.GetValues(typeof(Categories)))
+                    {
+
+                        if (@Model.SingleProject.Category == @value.ToString())
+                        {
+                            <option value="@value" selected>@value </option>
+                        }
+                        else
+                        {
+                            <option value="@value">@value </option>
+                        }
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="label">End Date</label>
+                <input type="date" class="form-control" name="EndDate" id="EndDate" value="@Model.SingleProject.EndDate" required="required" />
+            </div>
+
+            <div class="form-group">
+                <label class="label">Funding Goal</label>
+                <input type="number" class="form-control" step="any" name="Goal" id="Goal" value="@Model.SingleProject.Goal" required="required" />
+            </div>
+
+            <div class="custom-file">
+                <input type="file" name="ThemeImage" id="ThemeImage" class="custom-file-input" />
+                <label class="custom-file-label" for="ThemeImage">Choose Theme Image</label>
+                @*<input type="button" value="submit" onclick="doUpload()" />*@
+                @*<input type="text" class="form-control" step="any" name="ThemeImage" id="ThemeImage" placeholder="Theme Image" required="required" />*@
+            </div>
+
+            @*<div class="form-group">
+                    <label class="label">Theme Image</label>
+                    <input type="file" name="ThemeImage" id="ThemeImage" />
+                    <label class="label">Theme Image</label>
+                <input type="text" class="form-control" step="any" name="ThemeImage" id="ThemeImage" value="@Model.SingleProject.ThemeImage" required="required" />
+                </div>*@
+
+
+            <input type="hidden" id="ProjectCreatorId" value="@Model.ProjectCreatorId" />
+            <input type="hidden" id="ProjectId" value="@Model.SingleProject.Id" />
+
+            <div class="form-group">
+                <input type="submit" class="addproject-btn" />
+            </div>
+
+            <div class="form-group">
+                <div id="responseDiv"></div>
+            </div>
+            <br />
+            <br />
+            <br />
+        </form>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/js/site.js"></script>
+    <script>
+        $('#ThemeImage').on('change', function () {
+            //get the file name
+            var fileName = $(this).val();
+            //replace the "Choose a file" label
+            $(this).next('.custom-file-label').html(fileName);
+        })
+    </script>
+}
+
+

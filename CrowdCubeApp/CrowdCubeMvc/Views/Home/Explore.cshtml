@@ -1,0 +1,129 @@
+﻿@model CrowdCubeMvc.Models.ProjectCreatorModels
+@{
+    ViewData["Title"] = "Explore";
+    Layout = "~/Views/Shared/_BackerLayout.cshtml";
+}
+<head>
+    <link href="~/css/search.css" rel="stylesheet" />
+</head>
+<section class="page-section" id="explore">
+
+    <div class="album py-5">
+        <div class="container">
+            <div class="text-center">
+
+                <div class="input-group md-form form-sm form-1 pl-0">
+                    <div class="input-group-prepend">
+                        <button type="submit" name="button" class="search-btn" onclick="Search(@Model.BackerId)">
+                            <i class="fas fa-search text-white"
+                               aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <input id="title" class="form-control my-0 py-1" type="text" placeholder="Search" aria-label="Search">
+                </div>
+
+                @*<label asp-for="Categories" class="control-label"></label>*@
+
+
+                <div class="row" id="album">
+                    <div class="col-md-2 col-sm-2 col-xs-2">
+                        <div class="row mb-4 ">
+                            <div class="col-12 col-xl-12 col-lg-12 col-md-12">
+                                <p style="color:rgba(0, 0, 0, 0.5); float:left;">Categories</p>
+                                <button type="submit" class="cat-btn" name="button" onclick="AllCat(@Model.BackerId)">
+                                    All Categories
+                                </button>
+                            </div>
+                            @foreach (var value in Enum.GetValues(typeof(Categories)))
+                            {
+                                <div class="col-12 col-xl-12 col-lg-12 col-md-12 mt-2">
+                                    <button type="submit" class="cat-btn" name="button" onclick="Category(@Model.BackerId, '@value')">
+                                        @value
+                                    </button>
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="col-md-10 col-sm-10 col-xs-10">
+                        <div class="row">
+                            @{
+                                foreach (var project in Model.Projects)
+                                {
+                                    <div class="col-md-4">
+                                        <div class="card mb-4 shadow-sm">
+                                            <img class="bd-placeholder-img card-img-top" src="~/assets/img/@project.ThemeImage" alt="Card image cap">
+                                            <div class="card-body" style="min-height:200px;">
+                                                <p class="card-text">@project.Title</p>
+                                                <p class="card-text">@project.Description</p>
+                                                <div class="progress">
+                                                    <div class="progress-bar" role="progressbar" style="width: @(project.Progress)%;" aria-valuenow="@(project.Progress)" aria-valuemin="0" aria-valuemax="100">@(project.Progress)%</div>
+                                                </div>
+                                                <p></p>
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div class="btn-group">
+                                                        <a class="btn btn-sm btn-outline-secondary" href="@(Url.Action("ProjectView", "Home", new { projectId = @project.Id, userId = @Model.BackerId }))">
+                                                            View Project
+                                                        </a>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <nav aria-label="...">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item">
+                            <button type="submit" name="button" id="prev-btn" class="page-link" onclick="Previous(@Model.BackerId, @Model.pageNum)">
+                                &laquo; Previous
+                            </button>
+                        </li>
+                        @{
+                            for (int i = 0; i < Model.maxPage; i++)
+                            {
+                                <li class="page-item">
+                                    <button type="submit" name="button" class="page-link" onclick="CurrPage(@Model.BackerId, @(i+1))">
+                                        @(i+1)
+                                    </button>
+                                </li>
+
+                            }
+                        }
+                        <li class="page-item">
+                            @{
+                                int p = 0;
+                                int last = 0;
+                                if (@Model.pageNum < @Model.maxPage)
+                                {
+                                    p = @Model.pageNum;
+                                    last = 0;
+                                }
+                                else
+                                {
+                                    p = @Model.maxPage;
+                                    last = 1;
+                                }
+                            }
+                            <button type="submit" name="button" id="next-btn" class="page-link" onclick="Next(@Model.BackerId, @p,@last)">
+                                Next &raquo;
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+    <script src="../js/site.js"></script>
+}
+
+

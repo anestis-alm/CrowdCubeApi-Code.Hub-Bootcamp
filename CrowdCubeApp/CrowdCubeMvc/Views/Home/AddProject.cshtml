@@ -1,0 +1,80 @@
+﻿@model CrowdCubeMvc.Models.ProjectCreatorModels
+@{
+    ViewData["Title"] = "AddProject";
+    Layout = "~/Views/Shared/_ProjectCreatorLayout.cshtml";
+}
+
+
+<head>
+    <link href="~/css/AddProject.css" rel="stylesheet" />
+</head>
+
+
+<div class="container">
+    <div class="addproject-content">
+        <form id="addproject-form" class="addproject-form">
+            <div class="form-group">
+                <h1>Let’s get ready to start your campaign!</h1>
+                <h2>We want to create the best onboarding for you – please fill out the information below.</h2>
+            </div>
+            <div class="form-group">
+                <label class="label">Title</label>
+                <input type="text" class="form-control" id="Title" name="Title" placeholder="Your Project Title" required="required" />
+            </div>
+
+            <div class="form-group">
+                <label class="label">Description</label>
+                <input type="text" class="form-control" name="Description" id="Description" placeholder="Project Description" required="required" />
+            </div>
+
+            <div class="form-group">
+                @*<label class="label">Category</label>*@
+                @*<input type="text" class="form-control" name="Category" id="Category" placeholder="Category" required="required" />*@
+                <label asp-for="Categories" class="control-label"></label>
+                <select name="Category" id="Category"
+                        class="form-control">
+                    @foreach (var value in Enum.GetValues(typeof(Categories)))
+                    {
+                        <option value="@value">@value </option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="label">End Date</label>
+                <input type="date" class="form-control" name="EndDate" id="EndDate" placeholder="End Date" required="required" />
+            </div>
+
+            <div class="form-group">
+                <label class="label">Funding Goal</label>
+                <input type="number" class="form-control" step="any" name="Goal" id="Goal" placeholder="Your Funding Goal" required="required" />
+            </div>
+
+            <div class="custom-file">
+                <input type="file" name="ThemeImage" id="ThemeImage" class="custom-file-input" required="required" />
+                <label class="custom-file-label" for="ThemeImage">Choose Theme Image</label>
+                @*<input type="button" value="submit" onclick="doUpload()" />*@
+                @*<input type="text" class="form-control" step="any" name="ThemeImage" id="ThemeImage" placeholder="Theme Image" required="required" />*@
+            </div>
+
+            <input type="hidden" id="ProjectCreatorId" value="@Model.ProjectCreatorId" />
+
+            <div class="form-group">
+                <input type="submit" class="addproject-btn" />
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts{
+    <script src="../js/site.js"></script>
+    <script>
+        $('#ThemeImage').on('change', function () {
+            //get the file name
+            var fileName = $(this).val();
+            //replace the "Choose a file" label
+            $(this).next('.custom-file-label').html(fileName);
+        })
+    </script>
+}
+
+

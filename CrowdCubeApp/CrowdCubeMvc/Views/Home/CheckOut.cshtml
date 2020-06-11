@@ -1,0 +1,179 @@
+﻿@model CrowdCubeMvc.Models.ProjectCreatorModels
+@{
+    ViewData["Title"] = "CheckOut";
+    Layout = "~/Views/Shared/_BackerLayout.cshtml";
+}
+
+
+
+<head>
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="~/css/form-validation.css" rel="stylesheet">
+
+</head>
+
+<div class="container">
+    <div class="text-center">
+        <img class="d-block mx-auto mb-0" src="~/assets/img/Crowdcube_logo.png" alt="" width="180" height="50">
+    </div>
+    <div class="py-2 text-left">
+        <h2><b>@Model.Project.Title</b></h2>
+    </div>
+    @*<form id="checkout-form" class="checkout-form">*@
+    <div class="row">
+        <div class="col-md-4 order-md-3 mb-5">
+            <h6 class="d-flex justify-content-between align-items-center mb-3">
+                <span class="text-muted">CONTRIBUTION SUMMARY</span>
+
+            </h6>
+            <ul class="list-group mb-3">
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">Package</h6>
+                    </div>
+                    <h6 class="text-muted">@Model.Package.Amount</h6>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">Subtotal</h6>
+                        <small class="text-muted">Shipping</small>
+                    </div>
+                    <div>
+                        <h6 class="text-muted">@Model.Package.Amount</h6>
+                        <small class="text-muted">-</small>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0"><b>Total</b></h6>
+                    </div>
+                    <div>
+                        <h6 class="text-muted"><b>@Model.Package.Amount</b></h6>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <small class="my-0 text-muted">The payment will process in EUR. The actual amount charged by your card issuer may differ from our estimate based on their exchange rate and any applicable fees.</small>
+                    </div>
+                </li>
+
+            </ul>
+
+            <div class="card p-2">
+                <button type="submit" class="btn btn-secondary" onclick="this.disabled=true;submitPackageFund(@Model.BackerId,@Model.Project.Id,@Model.Package.Id)">CHECKOUT</button>
+            </div>
+        </div>
+
+        <div class="col-md-5 order-md-1">
+            <h4 class="mb-3">Shipping Address</h4>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="FullName">Full Name</label>
+                    <input type="text" class="form-control" id="fullName" placeholder="" value="">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="Country">Country</label>
+                    <input type="text" class="form-control" id="country" placeholder="" value="">
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="StreetAddress">Street Address</label>
+                    <input type="text" class="form-control" id="streetAdress" placeholder="" value="">
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label for="address">Address 2<span class="text-muted">(optional)</span></label>
+                    <input type="text" class="form-control" id="address2" placeholder="">
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label for="country">City</label>
+                    <input type="text" class="form-control" id="city" placeholder="">
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="state">Postal Code</label>
+                    <input type="text" class="form-control" id="code" placeholder="">
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="zip">Phone Num</label>
+                    <input type="text" class="form-control" id="phone" placeholder="">
+                </div>
+            </div>
+            <hr class="mb-4">
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="same-address">
+                <label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="save-info">
+                <label class="custom-control-label" for="save-info">Save this information for next time</label>
+            </div>
+            <hr class="mb-4">
+        </div>
+        <div class="col-md-3 order-md-2">
+            <h4 class="mb-3">Payment</h4>
+
+            <div class="d-block my-3">
+                <div class="custom-control custom-radio">
+                    <input id="credit" name="paymentMethod" type="radio" class="custom-control-input">
+                    <label class="custom-control-label" for="credit">Credit card</label>
+                </div>
+                <div class="custom-control custom-radio">
+                    <input id="debit" name="paymentMethod" type="radio" class="custom-control-input">
+                    <label class="custom-control-label" for="debit">Debit card</label>
+                </div>
+                <div class="custom-control custom-radio">
+                    <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input">
+                    <label class="custom-control-label" for="paypal">PayPal</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 mb-3">
+                    <label for="cc-name">Name on card</label>
+                    <input type="text" class="form-control" id="cc-name" placeholder="">
+                    <small class="text-muted">Full name as displayed on card</small>
+                </div>
+                <div class="col-md-12 mb-3">
+                    <label for="cc-number">Credit card Number</label>
+                    <input type="text" class="form-control" id="cc-number" placeholder="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="cc-expiration">Expiration</label>
+                    <input type="text" class="form-control" id="cc-expiration" placeholder="">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="cc-cvv">CVV</label>
+                    <input type="text" class="form-control" id="cc-cvv" placeholder="">
+                </div>
+            </div>
+            <hr class="mb-4">
+
+
+
+        </div>
+    </div>
+    @*</form>*@
+    <div class="form-group">
+        <div id="responseDiv" align="center" style="font-weight:bold;"></div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="../js/site.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+}
+

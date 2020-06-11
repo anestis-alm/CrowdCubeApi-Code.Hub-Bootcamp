@@ -1,0 +1,96 @@
+﻿@model CrowdCubeMvc.Models.ProjectCreatorModels
+@{
+    ViewData["Title"] = "MyFunds";
+    Layout = "~/Views/Shared/_BackerLayout.cshtml";
+}
+
+<section class="page-section bg-light" id="portfolio">
+    <div class="container">
+
+        <table id="example" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    @*<th>Description</th>*@
+                    <th>Category</th>
+                    <th>End date</th>
+                    <th>Fund Amount</th>
+                    <th>Rewards</th>
+                    <th>Goal</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    var count = 0;
+
+                    foreach (var project in Model.MyFunds)
+                    {
+
+                        <tr>
+                            <td><a style="color:coral;" href="@(Url.Action("ProjectView", "Home", new { projectId = @project.Id, userId = @Model.BackerId }))">@project.Title</a></td>
+                            @*<td>@project.Description</td>*@
+                            <td>@project.Category</td>
+                            <td>@project.EndDate</td>
+                            <td>@Model.BackerAmSpent[count]</td>
+                            <td>
+                                <select class="form-control" id="exampleFormControlSelect1">
+                                    <option value="" selected disabled hidden>Check Rewards</option>
+                                    @{
+                                        var count3 = 1;
+                                        @foreach (var reward in Model.Rewards)
+                                        {
+                                            if (@project.Id == reward.Project.Id)
+                                            {
+                                                <option>
+                                                    @{
+                                                        <p>Reward @count3: @reward.Reward </p>
+                                                        count3++;
+                                                    }
+                                                </option>
+                                            }
+                                        }
+
+                                    }
+                                </select>
+                            </td>
+                            <td>@project.Goal</td>
+                        </tr>
+                        count++;
+                    }
+
+                }
+
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Title</th>
+                    @*<th>Description</th>*@
+                    <th>Category</th>
+                    <th>End date</th>
+                    <th>Fund Amount</th>
+                    <th>Rewards</th>
+                    <th>Goal</th>
+                </tr>
+            </tfoot>
+        </table>
+
+    </div>
+</section>
+
+@section Scripts
+{
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+    </script>
+    <script>
+        $('#myModal').on('shown.bs.modal', function () {
+            $('#myInput').trigger('focus')
+        });
+    </script>
+}
+

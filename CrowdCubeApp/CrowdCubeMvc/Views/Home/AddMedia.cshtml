@@ -1,0 +1,48 @@
+﻿@model CrowdCubeMvc.Models.ProjectCreatorModels
+@{
+    ViewData["Title"] = "AddMedia";
+    Layout = "~/Views/Shared/_ProjectCreatorLayout.cshtml";
+}
+
+
+<head>
+    <link href="~/css/AddProject.css" rel="stylesheet" />
+</head>
+
+
+<div class="container">
+    <div class="addproject-content">
+        <form id="addmedia-form" class="addproject-form">
+            <div class="form-group">
+                <h1>Let’s add media to your campaign!</h1>
+                <h2>We want to create the best onboarding for you – please fill out the information below.</h2>
+            </div>
+
+            <div class="form-group">
+                <label class="label">Type</label>
+                <select name="Type" id="Type" class="form-control">
+                    <option value="Text">Text</option>
+                    <option value="Image">Image</option>
+                    <option value="Video">Video</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="label">File Name</label>
+                <input type="text" class="form-control" name="URL" id="URL" placeholder="File's Name" required="required" />
+            </div>
+
+            <input type="hidden" id="ProjectCreatorId" value="@Model.ProjectCreatorId" />
+            <input type="hidden" id="ProjectId" value="@Model.ProjectId" />
+
+            <div class="form-group">
+                <input type="submit" class="addproject-btn" />
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts{
+    <script src="../js/site.js"></script>
+}
+
+

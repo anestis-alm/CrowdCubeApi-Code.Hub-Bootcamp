@@ -1,6 +1,7 @@
 ﻿@model CrowdCubeMvc.Models.ProjectCreatorModels
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "BackerIndex";
+    Layout = "~/Views/Shared/_BackerLayout.cshtml";
 }
 
 
@@ -19,6 +20,7 @@
                 {
                     <li data-target="#carouselExampleIndicators" data-slide-to="@count"></li>
                 }
+
                 if (count == 5)
                 {
                     break;
@@ -36,7 +38,7 @@
                 if (count1 == 0)
                 {
                     <div class="carousel-item active">
-                        <a href="@(Url.Action("Login", "Home"))">
+                        <a href="@(Url.Action("ProjectView", "Home", new { projectId = @project.Id, userId = @Model.BackerId }))">
                             <img class="d-block w-100" src="~/assets/img/@project.ThemeImage" alt="First slide">
                         </a>
                         <div class="carousel-caption d-none d-md-block ">
@@ -48,7 +50,7 @@
                 else
                 {
                     <div class="carousel-item">
-                        <a href="@(Url.Action("Login", "Home"))">
+                        <a href="@(Url.Action("ProjectView", "Home", new { projectId = @project.Id, userId = @Model.BackerId }))">
                             <img class="d-block w-100" src="~/assets/img/@project.ThemeImage" alt="First slide">
                         </a>
                         <div class="carousel-caption d-none d-md-block">
@@ -62,7 +64,6 @@
                     break;
                 }
                 count1++;
-
             }
 
         }
@@ -93,7 +94,7 @@
                     {
                         <div class="col-lg-4 col-sm-6 mb-4">
                             <div class="portfolio-item">
-                                <a href="@(Url.Action("Login", "Home" ))">
+                                <a href="@(Url.Action("ProjectView", "Home" , new { projectId =  @project.Id , userId = @Model.BackerId}))">
                                     <img class="img-fluid" src="~/assets/img/@project.ThemeImage" alt="" />
                                 </a>
                                 <div class="portfolio-caption">
@@ -107,7 +108,7 @@
                     {
                         <div class="col-lg-4 col-sm-6 mb-4 mb-lg-0">
                             <div class="portfolio-item">
-                                <a href="@(Url.Action("Login", "Home"))">
+                                <a href="@(Url.Action("ProjectView", "Home" , new { projectId =  @project.Id , userId = @Model.BackerId}))">
                                     <img class="img-fluid" src="~/assets/img/@project.ThemeImage" alt="" style="height:200px" />
                                 </a>
                                 <div class="portfolio-caption">
@@ -184,45 +185,5 @@
                 </p>
             </div>
         </div>
-    </div>
-</section>
-
-<section class="page-section bg-light" id="team">
-    <div class="container">
-        <div class="text-center">
-            <h2 class="section-heading">Our Team</h2>
-            @*<h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>*@
-        </div>
-        <div class="row">
-            <div class="col-lg-3 col-sm-6">
-                <div class="team-member">
-                    <img class="mx-auto rounded-circle" src="~/assets/img/team/anestis.jpg" alt="" />
-                    <h4>Anestis Almaliotis</h4>
-                    <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com/in/anestis-almaliotis/"><i class="fab fa-linkedin-in"></i></a><a class="btn btn-dark btn-social mx-2" href="https://github.com/anestis-alm/"><i class="fab fa-github"></i></a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="team-member">
-                    <img class="mx-auto rounded-circle" src="~/assets/img/team/john.png" alt="" />
-                    <h4>Giannis Illiadis</h4>
-                    <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com/in/ioannis-iliadis-12b7a41a7"><i class="fab fa-linkedin-in"></i></a><a class="btn btn-dark btn-social mx-2" href="https://github.com/johnxcv"><i class="fab fa-github"></i></a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="team-member">
-                    <img class="mx-auto rounded-circle" src="~/assets/img/team/dimitra.jpg" alt="" />
-                    <h4>Dimitra Karastogianni</h4>
-                    <a class="btn btn-dark btn-social mx-2" href=""><i class="fab fa-linkedin-in"></i></a><a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-github"></i></a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="team-member">
-                    <img class="mx-auto rounded-circle" src="~/assets/img/team/chris.jpg" alt="" />
-                    <h4>Xristodoulos Karakasis</h4>
-                    <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com/in/christodoulos-karakasis/"><i class="fab fa-linkedin-in"></i></a><a class="btn btn-dark btn-social mx-2" href="https://github.com/CKar95"><i class="fab fa-github"></i></a>
-                </div>
-            </div>
-        </div>
-
     </div>
 </section>
