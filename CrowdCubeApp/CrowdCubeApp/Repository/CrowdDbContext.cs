@@ -18,12 +18,14 @@ namespace CrowdCubeApp.Repository
         public DbSet<ProjectStatus> ProjectStatuses { get; set; }
 
 
-        public readonly static string ConnectionString =
-            "Server =localhost; " +
-            "Database = CFApp; " +
-            "User Id = sa; " +
-            "Password = admin!@#123;";
+        //public readonly static string ConnectionString =
+        //    "Server =localhost; " +
+        //    "Database = CFApp; " +
+        //    "User Id = sa; " +
+        //    "Password = admin!@#123;";
 
+        public readonly static string ConnectionString =
+            "Server=tcp:crowdcubeappdbserver.database.windows.net,1433;Initial Catalog=CrowdCubeAppDb;Persist Security Info=False;User ID=serveradmin;Password=av29102002-;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
         public CrowdDbContext(DbContextOptions<CrowdDbContext> options)
                 : base(options)
